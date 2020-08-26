@@ -10,13 +10,23 @@ const CategoryRecipesScreen = (props) => {
 
   const allRecipes = RECIPES.filter(recipe => recipe.categoryIDs.indexOf(catID) >= 0)
 
-  const renderRecipeItem = itemData => (<RecipeItem
-    title={ itemData.item.title }
-    duration={ itemData.item.duration }
-    complexity={itemData.item.complexity}
-    affordability={ itemData.item.affordability }
-    imageUrl={itemData.item.imageUrl}
-    onSelect={ () => { } } />)
+  const renderRecipeItem = (itemData) => (
+    <RecipeItem
+      title={itemData.item.title}
+      duration={itemData.item.duration}
+      complexity={itemData.item.complexity}
+      affordability={itemData.item.affordability}
+      imageUrl={itemData.item.imageUrl}
+      onSelect={() =>
+        props.navigation.navigate({
+          routeName: "RecipeDetails",
+          params: {
+            recipeID: itemData.item.id,
+          },
+        })
+      }
+    />
+  );
 
   return (
     <View style={styles.screen}>
