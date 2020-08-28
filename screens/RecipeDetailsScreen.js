@@ -24,10 +24,16 @@ RecipeDetailsScreen["navigationOptions"] = (navigationData) => {
   const selectedRecipe = RECIPES.find(recipe => recipe.id = recipeID)
   return {
     title: selectedRecipe.title,
-    headerRight: () => (<HeaderButtons HeaderButtonComponent={HeaderBtn}>
-      <Item title='Favorite' iconName='ios-star' onPress={() => console.log('marked as favorite')}/>
-    </HeaderButtons>)
-  }
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+        <Item
+          title="Fav"
+          iconName="ios-star"
+          onPress={() => console.log("marked as favorite")}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 export default RecipeDetailsScreen

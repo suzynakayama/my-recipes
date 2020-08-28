@@ -1,14 +1,15 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryRecipesScreen from '../screens/CategoryRecipesScreen';
 import RecipeDetailsScreen from '../screens/RecipeDetailsScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 import { Platform } from 'react-native';
 import Colors from "../constants/Colors";
 
-// create the stack navigator - so pages will stack on top of each other, and when you press `back` the page will pop.
+// create the stack navigator - so pages will stack on top of each other, and when you press `back` the page will pop. Use when you need screens that you change from/to
 const RecipesNavigator = createStackNavigator(
   {
     Categories: CategoriesScreen,
@@ -30,5 +31,12 @@ const RecipesNavigator = createStackNavigator(
   }
 );
 
+const RecipesFavTabNavigator = createBottomTabNavigator({
+  // you can set this to a specific component, a specific screen or event the stack navigator if you want all of them
+  Recipes: RecipesNavigator,
+  Favorites: FavoritesScreen
+})
+
 // export the navigator wrapped with the createAppContainer method
-export default createAppContainer(RecipesNavigator);
+// only call the favorite one as a root navigator because within the favorite navigator you have the recipes navigator
+export default createAppContainer(RecipesFavTabNavigator);
