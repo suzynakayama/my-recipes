@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Platform } from 'react-native'
 import { CATEGORIES, RECIPES } from "../data/dummy-data";
 import { FlatList } from 'react-native-gesture-handler';
 import RecipeItem from '../components/RecipeItem';
+import RecipesList from '../components/RecipesList';
 
 
 const CategoryRecipesScreen = (props) => {
@@ -10,28 +11,8 @@ const CategoryRecipesScreen = (props) => {
 
   const allRecipes = RECIPES.filter(recipe => recipe.categoryIDs.indexOf(catID) >= 0)
 
-  const renderRecipeItem = (itemData) => (
-    <RecipeItem
-      title={itemData.item.title}
-      duration={itemData.item.duration}
-      complexity={itemData.item.complexity}
-      affordability={itemData.item.affordability}
-      imageUrl={itemData.item.imageUrl}
-      onSelect={() =>
-        props.navigation.navigate({
-          routeName: "RecipeDetails",
-          params: {
-            recipeID: itemData.item.id,
-          },
-        })
-      }
-    />
-  );
-
   return (
-    <View style={styles.screen}>
-      <FlatList data={ allRecipes } renderItem={ renderRecipeItem } style={{width: '100%'}} />
-    </View>
+    <RecipesList listData={ allRecipes } navigation={ props.navigation }/>
   );
 }
 
@@ -44,12 +25,3 @@ CategoryRecipesScreen['navigationOptions'] = (navigationData) => {
 }
 
 export default CategoryRecipesScreen
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 15
-  },
-});

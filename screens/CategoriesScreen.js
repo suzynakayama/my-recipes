@@ -4,6 +4,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 import CategoryGridItem from '../components/CategoryGridItem';
+import { HeaderButtons, Item} from 'react-navigation-header-buttons';
+import HeaderBtn from '../components/HeaderBtn';
 
 const CategoriesScreen = (props) => {
   // console.log(props)
@@ -44,9 +46,12 @@ const CategoriesScreen = (props) => {
 }
 
 //# to change the title and style
-CategoriesScreen['navigationOptions'] = () => {
+CategoriesScreen['navigationOptions'] = (navData) => {
   return {
     title: "Recipe Categories",
+    headerLeft: () => <HeaderButtons HeaderButtonComponent={ HeaderBtn }>
+      <Item title='Menu' iconName='ios-menu' onPress={ () => navData.navigation.toggleDrawer() } />
+    </HeaderButtons>
     // headerStyle: {
     //   backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
     // },
