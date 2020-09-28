@@ -94,14 +94,38 @@ const RecipesFavTabNavigator =
         },
     });
 
-const FiltersTabNavigator = createStackNavigator({
-  Filters: FiltersScreen
-})
+const FiltersTabNavigator = createStackNavigator(
+  {
+    Filters: FiltersScreen,
+  },
+  // use navigationOptions to override the name 'AllFilters'
+  {
+    navigationOptions: {
+      drawerLabel: "Filters",
+    },
+    defaultNavigationOptions: defaultStackNavOptions,
+  }
+);
 
 const MainNavigator = createDrawerNavigator(
   {
-    RecipesFavs: RecipesFavTabNavigator,
-    Filters: FiltersTabNavigator,
+    RecipesFavs: {
+      screen: RecipesFavTabNavigator,
+      // use navigationOptions to override the name 'RecipesFavs'
+      navigationOptions: {
+        drawerLabel: "Recipes",
+      },
+    },
+    AllFilters: FiltersTabNavigator,
+  },
+  // use contentOptions to override the style of the Drawer
+  {
+    contentOptions: {
+      activeTintColor: Colors.accent,
+      labelStyle: {
+        fontFamily: "open-sans-bold",
+      },
+    },
   }
 );
 
